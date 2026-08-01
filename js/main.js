@@ -10,16 +10,18 @@
   const nextButton = document.querySelector("[data-carousel-next]");
 
   const isAppleDevice = /Mac|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  const appStoreUrl = config.appStoreUrl || "";
+  const googlePlayUrl = config.googlePlayUrl || "";
   const preferredStoreUrl = isAppleDevice
-    ? config.appStoreUrl
-    : config.googlePlayUrl;
+    ? appStoreUrl || googlePlayUrl
+    : googlePlayUrl || appStoreUrl;
 
   document.querySelectorAll("[data-store]").forEach((link) => {
     const store = link.dataset.store;
     const url = store === "appStore"
-      ? config.appStoreUrl
+      ? appStoreUrl
       : store === "googlePlay"
-        ? config.googlePlayUrl
+        ? googlePlayUrl
         : preferredStoreUrl;
 
     if (url) {
@@ -28,7 +30,26 @@
         link.target = "_blank";
         link.rel = "noopener noreferrer";
       }
+      return;
     }
+
+    // No listing yet for this store: render as an inert "coming soon" affordance.
+    if (store === "smart") {
+      link.href = "#download";
+      return;
+    }
+
+    link.classList.add("is-unavailable");
+    link.removeAttribute("href");
+    link.removeAttribute("target");
+    link.removeAttribute("rel");
+    link.setAttribute("aria-disabled", "true");
+
+    const label = link.querySelector("span strong");
+    const kicker = link.querySelector("span small");
+    if (label) label.textContent = "Coming soon";
+    if (kicker) kicker.textContent = "on iOS";
+    if (link.classList.contains("qr-card")) link.hidden = true;
   });
 
   const closeMenu = () => {
