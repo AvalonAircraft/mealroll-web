@@ -1,47 +1,470 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>MealRoll — Decide what to eat in 10 seconds</title>
-<meta name="description" content="MealRoll helps you decide what to cook or eat. Roll for recipes, cook with what you have, find restaurants nearby, and track your habits.">
-<link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#fffaf3" />
+  <meta name="description" content="MealRoll helps you decide what to eat, scan ingredients, discover restaurants by recipe, manage your pantry and build better cooking habits." />
+  <meta property="og:title" content="MealRoll — Decide what to eat in 10 seconds" />
+  <meta property="og:description" content="Roll, scan, discover, plan and track — all in one smart food app." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/screens/home.webp" />
+  <title>MealRoll — Decide what to eat in 10 seconds</title>
+  <link rel="icon" href="favicon.png" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <script src="js/config.js" defer></script>
+  <script src="js/main.js" defer></script>
 </head>
 <body>
-<header class="site">
-  <a class="brand" href="index.html">MealRoll</a>
-  <nav>
-    <a href="support.html">Support</a>
-    <a href="privacy.html">Privacy</a>
-    <a href="terms.html">Terms</a>
-  </nav>
-</header>
+  <svg class="svg-sprite" aria-hidden="true" focusable="false">
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-apple" viewBox="0 0 24 24"><path d="M16.8 12.4c0-2.7 2.2-4 2.3-4.1-1.2-1.8-3.1-2-3.8-2-1.6-.2-3.1.9-3.9.9-.8 0-2-.9-3.3-.9-1.7 0-3.3 1-4.2 2.5-1.8 3.1-.5 7.7 1.3 10.2.9 1.2 1.9 2.6 3.3 2.5 1.3-.1 1.8-.8 3.4-.8s2 .8 3.4.8c1.4 0 2.3-1.3 3.1-2.5 1-1.4 1.4-2.8 1.4-2.9-.1 0-3-.9-3-3.7Z"/><path d="M14.2 4.7c.7-.9 1.2-2.1 1.1-3.3-1.1.1-2.4.7-3.2 1.6-.7.8-1.3 2-1.1 3.2 1.2.1 2.4-.6 3.2-1.5Z"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M4.2 3.5 15 12 4.2 20.5V3.5Z"/><path d="m15 12 3.3-2.5c1.5-1.1 2.8-.3 2.8 1.4v2.2c0 1.7-1.3 2.5-2.8 1.4L15 12Z"/></symbol>
+    <symbol id="i-dice" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="8" cy="8" r="1.4"/><circle cx="16" cy="8" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="8" cy="16" r="1.4"/><circle cx="16" cy="16" r="1.4"/></symbol>
+    <symbol id="i-scan" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/><circle cx="12" cy="12" r="3.2"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20V7"/></symbol>
+    <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M20.5 3.5C12 3.6 5.8 6.7 4.2 12.1c-1.4 4.7 2 8.2 6.3 7.6 5.7-.8 9.3-7.6 10-16.2Z"/><path d="M5.2 18.8c2.4-3.2 6.2-6 11.3-8.3"/></symbol>
+    <symbol id="i-bolt" viewBox="0 0 24 24"><path d="m13 2-8 12h7l-1 8 8-12h-7l1-8Z"/></symbol>
+    <symbol id="i-bag" viewBox="0 0 24 24"><path d="M5 8h14l-1 13H6L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 2.8 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-2.9L6.4 20l1.1-6.2L3 9.4l6.2-.9L12 2.8Z"/></symbol>
+    <symbol id="i-camera" viewBox="0 0 24 24"><path d="M4 7h4l1.4-2h5.2L16 7h4v13H4V7Z"/><circle cx="12" cy="13" r="4"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 4h6a3 3 0 0 1 3 3v13a3 3 0 0 0-3-3H4V4ZM20 4h-6a3 3 0 0 0-3 3v13a3 3 0 0 1 3-3h6V4Z"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  </svg>
 
-<main>
-  <h1>Decide what to eat in 10&nbsp;seconds</h1>
-  <p class="lede">MealRoll ends decision fatigue. Roll for a meal that fits your mood
-  and the time you have, cook it with what's already in your kitchen, or find a
-  restaurant nearby.</p>
+  <header class="site-header" data-header>
+    <div class="container nav-shell">
+      <a class="brand" href="#top" aria-label="MealRoll home">
+        <img src="assets/brand/mealroll-mark.png" alt="" width="46" height="46" />
+        <span class="brand-name"><span>Meal</span><span>Roll</span></span>
+      </a>
 
-  <h2>What the app does</h2>
-  <ul>
-    <li><strong>Roll for meals</strong> — a recipe picked for your vibe, time and taste.</li>
-    <li><strong>Cook with what you have</strong> — scan your fridge, get matching recipes.</li>
-    <li><strong>Find restaurants</strong> — search nearby places by dish, cuisine or ingredient.</li>
-    <li><strong>Smart Pantry</strong> — track what you own and use it up before it expires.</li>
-    <li><strong>Track your habits</strong> — weekly report, food spending and nutrition insights.</li>
-  </ul>
+      <nav class="desktop-nav" aria-label="Primary navigation">
+        <a href="#features">Features</a>
+        <a href="#how">How it works</a>
+        <a href="#screens">Screens</a>
+        <a href="#download">Download</a>
+        <a href="support.html">Support</a>
+      </nav>
 
-  <h2>Need help?</h2>
-  <p>Visit our <a href="support.html">support page</a> or email
-  <a href="mailto:support@avalongamestudios.com">support@avalongamestudios.com</a>.
-  We reply within a few business days.</p>
-</main>
+      <div class="nav-actions">
+        <a class="button button-ghost button-sm" href="#screens">See preview</a>
+        <a class="button button-primary button-sm store-link" data-store="smart" href="#download">Download app</a>
+      </div>
 
-<footer class="site">
-  <p>MealRoll is developed by Kristian Stockhaus.</p>
-  <p><a href="support.html">Support</a> · <a href="privacy.html">Privacy Policy</a> · <a href="terms.html">Terms of Use</a></p>
-  <p><a href="mailto:support@avalongamestudios.com">support@avalongamestudios.com</a></p>
-</footer>
+      <button class="menu-button" type="button" aria-label="Open menu" aria-expanded="false" data-menu-button>
+        <svg class="icon"><use href="#i-menu"/></svg>
+      </button>
+    </div>
+
+    <div class="mobile-panel" data-mobile-panel>
+      <nav aria-label="Mobile navigation">
+        <a href="#features">Features</a>
+        <a href="#how">How it works</a>
+        <a href="#screens">Screens</a>
+        <a href="#download">Download</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <a class="button button-primary store-link" data-store="smart" href="#download">Download app</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero section-pad">
+      <div class="hero-glow hero-glow-one"></div>
+      <div class="hero-glow hero-glow-two"></div>
+      <div class="food-decor leaf leaf-a"></div>
+      <div class="food-decor leaf leaf-b"></div>
+      <div class="food-decor tomato tomato-a"></div>
+      <div class="food-decor mushroom mushroom-a"><span></span></div>
+
+      <div class="container hero-grid">
+        <div class="hero-copy reveal">
+          <div class="eyebrow"><span class="sparkle">✦</span> Your smarter food companion</div>
+          <h1>Decide what to eat in <em>10 seconds.</em></h1>
+          <p class="hero-lead">Roll for meals, discover restaurants by recipe, scan ingredients, plan smarter, track habits, and enjoy cooking — all in one friendly app.</p>
+
+          <div class="hero-actions">
+            <a class="store-badge store-link" data-store="appStore" href="https://apps.apple.com/" target="_blank" rel="noopener">
+              <svg class="store-icon"><use href="#i-apple"/></svg>
+              <span><small>Download on the</small><strong>App Store</strong></span>
+            </a>
+            <a class="store-badge store-link" data-store="googlePlay" href="https://play.google.com/store/apps/" target="_blank" rel="noopener">
+              <svg class="store-icon"><use href="#i-play"/></svg>
+              <span><small>Get it on</small><strong>Google Play</strong></span>
+            </a>
+            <a class="button button-primary button-large" href="#features">
+              <svg class="icon"><use href="#i-dice"/></svg>
+              Start rolling
+            </a>
+          </div>
+
+          <div class="feature-chips" aria-label="Key capabilities">
+            <span><svg class="icon"><use href="#i-dice"/></svg>Roll</span>
+            <span><svg class="icon"><use href="#i-scan"/></svg>Scan</span>
+            <span><svg class="icon"><use href="#i-pin"/></svg>Discover</span>
+            <span><svg class="icon"><use href="#i-chart"/></svg>Track</span>
+            <span><svg class="icon"><use href="#i-leaf"/></svg>Save time</span>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal reveal-delay">
+          <div class="hero-orbit orbit-one"></div>
+          <div class="hero-orbit orbit-two"></div>
+          <div class="phone phone-large phone-home">
+            <div class="phone-island"></div>
+            <img src="assets/screens/home.webp" alt="MealRoll home screen showing meal roll, cooking, restaurant and shopping options" />
+          </div>
+          <div class="phone phone-small phone-roll">
+            <div class="phone-island"></div>
+            <img src="assets/screens/roll.webp" alt="MealRoll decide for me screen" />
+          </div>
+          <div class="floating-note floating-note-one"><svg class="icon"><use href="#i-bolt"/></svg><strong>Fast ideas</strong><span>in seconds</span></div>
+          <div class="floating-note floating-note-two"><svg class="icon"><use href="#i-leaf"/></svg><strong>Less waste</strong><span>smarter pantry</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="benefit-strip">
+      <div class="container benefit-grid">
+        <article class="benefit-card reveal">
+          <span class="benefit-icon icon-yellow"><svg class="icon"><use href="#i-bolt"/></svg></span>
+          <h3>Meal ideas in seconds</h3>
+          <p>Stop overthinking and get delicious ideas instantly.</p>
+        </article>
+        <article class="benefit-card reveal">
+          <span class="benefit-icon icon-green"><svg class="icon"><use href="#i-bag"/></svg></span>
+          <h3>Smart pantry planning</h3>
+          <p>Use what you have first and reduce food waste.</p>
+        </article>
+        <article class="benefit-card reveal">
+          <span class="benefit-icon icon-red"><svg class="icon"><use href="#i-pin"/></svg></span>
+          <h3>Restaurant discovery</h3>
+          <p>Find places that match your recipe or ingredients.</p>
+        </article>
+        <article class="benefit-card reveal">
+          <span class="benefit-icon icon-purple"><svg class="icon"><use href="#i-chart"/></svg></span>
+          <h3>Weekly reports</h3>
+          <p>Track habits, spending and nutrition with ease.</p>
+        </article>
+        <article class="benefit-card reveal">
+          <span class="benefit-icon icon-orange"><svg class="icon"><use href="#i-star"/></svg></span>
+          <h3>Collect recipes</h3>
+          <p>Save favorites, build your collection, cook better.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="features section-pad" id="features">
+      <div class="container">
+        <div class="section-heading reveal">
+          <span class="eyebrow"><span class="sparkle">✦</span> One app, fewer decisions</span>
+          <h2>Everything you need in one <em>smart food app</em></h2>
+          <p>MealRoll turns everyday food decisions into a simple, guided experience — whether you are cooking at home, eating out, or planning ahead.</p>
+        </div>
+
+        <div class="feature-stack">
+          <article class="feature-panel feature-panel-right reveal">
+            <div class="feature-visual feature-visual-left">
+              <div class="phone phone-feature tilt-left">
+                <div class="phone-island"></div>
+                <img src="assets/screens/roll.webp" alt="Decide for me screen with a meal rolling dice" loading="lazy" />
+              </div>
+              <div class="decor-sparkles">✦ ✧</div>
+              <div class="food-decor leaf leaf-panel-one"></div>
+            </div>
+            <div class="feature-copy">
+              <div class="feature-number">1</div>
+              <h3>Roll for the perfect meal</h3>
+              <p>Let MealRoll decide what to eat. Roll based on what you have, how you feel, or how much time you have.</p>
+              <ul class="check-list">
+                <li>Customize by time, mood or ingredients</li>
+                <li>Get meal ideas in seconds</li>
+                <li>Perfect for busy days or meal dilemmas</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="feature-panel feature-panel-left reveal">
+            <div class="feature-copy">
+              <div class="feature-number">2</div>
+              <h3>Find restaurants by recipe</h3>
+              <p>Search restaurants by dish, cuisine, ingredients, or your own recipes — then compare the best matches nearby.</p>
+              <ul class="check-list">
+                <li>Discover top matches near you</li>
+                <li>See menus, ratings and details</li>
+                <li>Perfect for eating out smarter</li>
+              </ul>
+            </div>
+            <div class="feature-visual feature-visual-right">
+              <div class="phone phone-feature tilt-right">
+                <div class="phone-island"></div>
+                <img src="assets/screens/restaurant.webp" alt="Restaurant search by recipe screen" loading="lazy" />
+              </div>
+              <div class="food-decor tomato tomato-panel"></div>
+            </div>
+          </article>
+
+          <article class="feature-panel feature-panel-right reveal">
+            <div class="feature-visual feature-visual-left">
+              <div class="phone phone-feature tilt-left-small">
+                <div class="phone-island"></div>
+                <img src="assets/screens/scanner.webp" alt="AI ingredient scanner screen" loading="lazy" />
+              </div>
+              <div class="food-decor mushroom mushroom-panel"><span></span></div>
+            </div>
+            <div class="feature-copy">
+              <div class="feature-number">3</div>
+              <h3>Scan ingredients instantly</h3>
+              <p>Use AI to scan your fridge or ingredients and get meal ideas and helpful matches right away.</p>
+              <ul class="check-list">
+                <li>AI-powered ingredient recognition</li>
+                <li>Detect freshness and expiry</li>
+                <li>Get ideas from what you already have</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="feature-panel feature-panel-left reveal">
+            <div class="feature-copy">
+              <div class="feature-number">4</div>
+              <h3>Use what you have first</h3>
+              <p>Smart Pantry helps you track items, manage expiry, plan meals and reduce unnecessary grocery spending.</p>
+              <ul class="check-list">
+                <li>Track pantry items in one place</li>
+                <li>Know what is expiring soon</li>
+                <li>Reduce waste and save money</li>
+              </ul>
+            </div>
+            <div class="feature-visual feature-visual-right">
+              <div class="phone phone-feature tilt-right-small">
+                <div class="phone-island"></div>
+                <img src="assets/screens/pantry.webp" alt="Smart Pantry screen" loading="lazy" />
+              </div>
+              <div class="food-decor leaf leaf-panel-two"></div>
+            </div>
+          </article>
+
+          <article class="feature-panel feature-panel-right feature-panel-wide reveal">
+            <div class="feature-visual feature-visual-left feature-duo">
+              <div class="phone phone-feature phone-report tilt-left-small">
+                <div class="phone-island"></div>
+                <img src="assets/screens/report.webp" alt="Weekly food report screen" loading="lazy" />
+              </div>
+              <div class="phone phone-feature phone-nutrition tilt-right-small">
+                <div class="phone-island"></div>
+                <img src="assets/screens/nutrition.webp" alt="Personal nutrition twin screen" loading="lazy" />
+              </div>
+            </div>
+            <div class="feature-copy">
+              <div class="feature-number">5</div>
+              <h3>Track habits, spending &amp; nutrition</h3>
+              <p>See your weekly reports, understand food spending, follow nutrition progress and build better routines.</p>
+              <ul class="check-list">
+                <li>Food spending and weekly summaries</li>
+                <li>Nutrition Twin and personal insights</li>
+                <li>Build healthy, consistent habits</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="feature-panel feature-panel-left feature-panel-wide reveal">
+            <div class="feature-copy">
+              <div class="feature-number">6</div>
+              <h3>Level up your cooking journey</h3>
+              <p>Customize your profile, collect exclusive frames, unlock achievements and stay motivated every day.</p>
+              <ul class="check-list">
+                <li>Collect exclusive profile frames</li>
+                <li>Unlock achievements and rewards</li>
+                <li>Stay inspired by visible progress</li>
+              </ul>
+            </div>
+            <div class="feature-visual feature-visual-right feature-trio">
+              <div class="phone phone-feature phone-profile tilt-right-small">
+                <div class="phone-island"></div>
+                <img src="assets/screens/profile.webp" alt="MealRoll profile screen" loading="lazy" />
+              </div>
+              <div class="mini-screen mini-screen-one"><img src="assets/screens/avatar.webp" alt="Avatar and frame customization" loading="lazy" /></div>
+              <div class="mini-screen mini-screen-two"><img src="assets/screens/achievements.webp" alt="Cooking achievements and badges" loading="lazy" /></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="how section-pad" id="how">
+      <div class="container">
+        <div class="section-heading compact reveal">
+          <span class="eyebrow"><span class="sparkle">✦</span> Simple from the first tap</span>
+          <h2>How <span class="meal">Meal</span><span class="roll">Roll</span> works</h2>
+        </div>
+        <div class="steps-grid">
+          <article class="step-card reveal">
+            <span class="step-number">1</span>
+            <span class="step-icon"><svg class="icon"><use href="#i-dice"/></svg></span>
+            <h3>Roll or scan</h3>
+            <p>Roll the dice for a surprise meal or scan ingredients to get started in seconds.</p>
+          </article>
+          <article class="step-card reveal">
+            <span class="step-number">2</span>
+            <span class="step-icon step-icon-green"><svg class="icon"><use href="#i-bag"/></svg></span>
+            <h3>Get meals, recipes or matches</h3>
+            <p>Receive ideas, recipes or restaurant matches tailored to your current needs.</p>
+          </article>
+          <article class="step-card reveal">
+            <span class="step-number">3</span>
+            <span class="step-icon step-icon-purple"><svg class="icon"><use href="#i-chart"/></svg></span>
+            <h3>Track, improve and repeat</h3>
+            <p>Track habits, spending and nutrition, then improve week by week.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="screens section-pad" id="screens">
+      <div class="container">
+        <div class="section-heading compact reveal">
+          <span class="eyebrow"><span class="sparkle">✦</span> Designed to feel effortless</span>
+          <h2>Explore <span class="meal">Meal</span><span class="roll">Roll</span></h2>
+          <p>Swipe through the core experiences that make everyday food choices easier.</p>
+        </div>
+
+        <div class="screen-carousel-wrap reveal">
+          <button class="carousel-button carousel-prev" type="button" aria-label="Previous screens" data-carousel-prev>
+            <svg class="icon carousel-prev-icon"><use href="#i-chevron"/></svg>
+          </button>
+          <div class="screen-carousel" data-carousel>
+            <article class="screen-card screen-gold">
+              <div class="screen-phone"><img src="assets/screens/home.webp" alt="MealRoll home screen" loading="lazy" /></div>
+              <h3>Roll</h3>
+              <p>Your personalized food command center.</p>
+            </article>
+            <article class="screen-card screen-red">
+              <div class="screen-phone"><img src="assets/screens/restaurant.webp" alt="Restaurant Search screen" loading="lazy" /></div>
+              <h3>Restaurant Search</h3>
+              <p>Find restaurants that match a dish or recipe.</p>
+            </article>
+            <article class="screen-card screen-orange">
+              <div class="screen-phone"><img src="assets/screens/scanner.webp" alt="Ingredient Scanner screen" loading="lazy" /></div>
+              <h3>Ingredient Scanner</h3>
+              <p>Turn a fridge photo into useful meal ideas.</p>
+            </article>
+            <article class="screen-card screen-green">
+              <div class="screen-phone"><img src="assets/screens/pantry.webp" alt="Smart Pantry screen" loading="lazy" /></div>
+              <h3>Smart Pantry</h3>
+              <p>Use ingredients before they go to waste.</p>
+            </article>
+            <article class="screen-card screen-purple">
+              <div class="screen-phone"><img src="assets/screens/report.webp" alt="Weekly Report screen" loading="lazy" /></div>
+              <h3>Weekly Report</h3>
+              <p>Understand spending and cooking habits.</p>
+            </article>
+            <article class="screen-card screen-gold">
+              <div class="screen-phone"><img src="assets/screens/profile.webp" alt="MealRoll Profile screen" loading="lazy" /></div>
+              <h3>Profile</h3>
+              <p>See your identity, progress and rewards.</p>
+            </article>
+          </div>
+          <button class="carousel-button carousel-next" type="button" aria-label="Next screens" data-carousel-next>
+            <svg class="icon"><use href="#i-chevron"/></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq section-pad" id="faq">
+      <div class="container faq-grid">
+        <div class="faq-copy reveal">
+          <span class="eyebrow"><span class="sparkle">✦</span> Frequently asked</span>
+          <h2>Everything you need to know</h2>
+          <p>MealRoll is designed to make food choices faster without taking control away from you.</p>
+          <a class="button button-secondary" href="#download">Get MealRoll</a>
+        </div>
+        <div class="faq-list reveal">
+          <details open>
+            <summary>How does the meal roll work?<svg class="icon"><use href="#i-plus"/></svg></summary>
+            <p>MealRoll combines your time, mood, preferences, ingredients and context to suggest a meal that fits the moment.</p>
+          </details>
+          <details>
+            <summary>Can I use MealRoll without scanning food?<svg class="icon"><use href="#i-plus"/></svg></summary>
+            <p>Yes. Scanning is optional. You can roll immediately, add ingredients manually, browse recipes or search restaurants.</p>
+          </details>
+          <details>
+            <summary>Does Smart Pantry help reduce waste?<svg class="icon"><use href="#i-plus"/></svg></summary>
+            <p>Smart Pantry helps you remember what you have, highlight items that need using and plan meals around them first.</p>
+          </details>
+          <details>
+            <summary>Is MealRoll available on iPhone and Android?<svg class="icon"><use href="#i-plus"/></svg></summary>
+            <p>Yes — MealRoll runs on both iPhone and Android. Use the download buttons above to get it from the App Store or Google Play.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="download section-pad" id="download">
+      <div class="download-glow"></div>
+      <div class="food-decor leaf leaf-download-one"></div>
+      <div class="food-decor leaf leaf-download-two"></div>
+      <div class="food-decor tomato tomato-download"></div>
+      <div class="container download-grid">
+        <div class="download-copy reveal">
+          <span class="eyebrow"><span class="sparkle">✦</span> Your next meal starts here</span>
+          <h2>Ready to <em>roll</em> your next <span>meal?</span></h2>
+          <p>Download MealRoll and make every meal decision delicious, simple and stress-free.</p>
+          <a class="button button-primary button-large store-link" data-store="smart" href="#">
+            <svg class="icon"><use href="#i-dice"/></svg>
+            Download MealRoll
+          </a>
+          <div class="download-trust">
+            <span><svg class="icon"><use href="#i-check"/></svg>Friendly onboarding</span>
+            <span><svg class="icon"><use href="#i-check"/></svg>Fast, clear decisions</span>
+            <span><svg class="icon"><use href="#i-check"/></svg>Made for everyday life</span>
+          </div>
+        </div>
+
+        <div class="qr-grid reveal reveal-delay">
+          <a class="qr-card store-link" data-store="appStore" href="https://apps.apple.com/" target="_blank" rel="noopener">
+            <div class="qr-store-heading">
+              <svg class="store-icon"><use href="#i-apple"/></svg>
+              <span><small>Download on the</small><strong>App Store</strong></span>
+            </div>
+            <img src="assets/qr/appstore.png" alt="QR code for the Apple App Store" width="300" height="300" />
+            <span class="qr-caption">Scan to download</span>
+          </a>
+          <a class="qr-card store-link" data-store="googlePlay" href="https://play.google.com/store/apps/" target="_blank" rel="noopener">
+            <div class="qr-store-heading">
+              <svg class="store-icon"><use href="#i-play"/></svg>
+              <span><small>Get it on</small><strong>Google Play</strong></span>
+            </div>
+            <img src="assets/qr/googleplay.png" alt="QR code for Google Play" width="300" height="300" />
+            <span class="qr-caption">Scan to download</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <a class="brand" href="#top" aria-label="MealRoll home">
+        <img src="assets/brand/mealroll-mark.png" alt="" width="42" height="42" />
+        <span class="brand-name"><span>Meal</span><span>Roll</span></span>
+      </a>
+      <p>MealRoll — decide faster, cook smarter.</p>
+      <nav aria-label="Footer navigation">
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <a href="support.html">Support</a>
+        <a href="mailto:support@avalongamestudios.com">Contact</a>
+      </nav>
+    </div>
+  </footer>
 </body>
 </html>

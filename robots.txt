@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mealroll.app/sitemap.xml
