@@ -1416,6 +1416,45 @@ summary:focus-visible {
     display: none;
   }
 
+  /* The burger and its panel have to appear at the same width the inline nav
+     disappears, otherwise the menu is unreachable down to the 860px breakpoint. */
+  .menu-button {
+    display: inline-flex;
+  }
+
+  .mobile-panel {
+    position: fixed;
+    z-index: 99;
+    inset: 92px 20px auto;
+    padding: 20px;
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    background: rgba(255, 253, 249, 0.97);
+    box-shadow: var(--shadow-md);
+    backdrop-filter: blur(18px);
+  }
+
+  .mobile-panel.is-open {
+    display: grid;
+    gap: 18px;
+  }
+
+  .mobile-panel nav {
+    display: grid;
+    gap: 2px;
+  }
+
+  .mobile-panel nav a {
+    padding: 12px 14px;
+    border-radius: 12px;
+    font-weight: 800;
+  }
+
+  .mobile-panel nav a:hover {
+    background: #fff3e7;
+    color: var(--red);
+  }
+
   .nav-actions {
     margin-left: auto;
   }
@@ -1453,43 +1492,6 @@ summary:focus-visible {
 
   .nav-actions {
     display: none;
-  }
-
-  .menu-button {
-    display: inline-flex;
-  }
-
-  .mobile-panel {
-    position: fixed;
-    z-index: 99;
-    inset: 92px 20px auto;
-    padding: 20px;
-    border: 1px solid var(--line);
-    border-radius: 24px;
-    background: rgba(255, 253, 249, 0.97);
-    box-shadow: var(--shadow-md);
-    backdrop-filter: blur(18px);
-  }
-
-  .mobile-panel.is-open {
-    display: grid;
-    gap: 18px;
-  }
-
-  .mobile-panel nav {
-    display: grid;
-    gap: 2px;
-  }
-
-  .mobile-panel nav a {
-    padding: 12px 14px;
-    border-radius: 12px;
-    font-weight: 800;
-  }
-
-  .mobile-panel nav a:hover {
-    background: #fff3e7;
-    color: var(--red);
   }
 
   .hero {
